@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/homeFragment">
+    tools:ignore="InvalidNavigation">
 
     <fragment
-        android:id="@+id/homeFragment"
         android:name="com.seboba.scratch.nav.HomeFragment"
         android:label="HomeFragment"
         app:route="home"
         />
 
     <fragment
-        android:id="@+id/splashFragment"
         android:name="com.seboba.scratch.nav.SplashFragment"
         android:label="SplashFragment"
         app:route="splash"
         />
 
     <fragment
-        android:id="@+id/contentFragment"
         android:name="com.seboba.scratch.nav.ContentFragment"
         android:label="ContentFragment"
         app:route="content"

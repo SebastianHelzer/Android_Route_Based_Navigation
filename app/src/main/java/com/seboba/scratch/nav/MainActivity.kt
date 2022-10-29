@@ -25,7 +25,7 @@ enum class NavType {
         XML_ID -> false
     }
 }
-private val navType: NavType = NavType.XML_ID
+private val navType: NavType = NavType.XML_ROUTE
 private val routeBased: Boolean = navType.routeBased
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +38,12 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val nav = findNavController(R.id.nav_host_fragment)
         when(navType) {
-            NavType.XML_ROUTE -> nav.setGraph(R.navigation.nav_route_based)
+            NavType.XML_ROUTE -> {
+                nav.navInflater.inflate(R.navigation.nav_route_based).apply {
+                    setStartDestination("home")
+                    nav.setGraph(this, null)
+                }
+            }
             NavType.DSL_ROUTE -> nav.setGraph(nav.createRouteGraph(), null)
             NavType.XML_ID ->  nav.setGraph(R.navigation.nav_id_based)
         }
@@ -84,7 +89,8 @@ class SplashFragment: ComposeFragment() {
             Text("Splash Fragment")
             Button(onClick = {
                 if (routeBased) {
-                    nav.navigate(route = "content", navOptions { popUpTo(route = "splash") { inclusive = true } })
+//                    nav.navigate(route = "content", navOptions { popUpTo(route = "splash") { inclusive = true } })
+                    nav.navigate(route = "content", navOptions { popUpTo(route = "home") { inclusive = false } })
                 } else {
                     nav.navigate(R.id.contentFragment, args = null, navOptions {
                         popUpTo(R.id.splashFragment) { inclusive = true }
